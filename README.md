@@ -37,6 +37,23 @@ $ echo "Berlin,London" | tr ',' '\n' | gps --separator comma
 51.4893335,-0.14405508452768728,London
 ```
 
+## Importing it as a library
+
+```go
+  import "github.com/marianogappa/gps/pkg"
+
+  ...
+
+  pkg.GPSFromReader(
+		os.Stdin,
+		pkg.WithOutputSeparator("comma"),
+		pkg.WithOutputToWriter(os.Stdout),
+	)
+```
+
+- Use `WithOutputChannel(ch chan string)` to output to a channel instead of a writer. Or both.
+- Use `WithDialer(d proxy.Dialer)` to bring your own Dialer.
+
 ## Notes
 
 - It caches results in the system's temp folder to be nice to OpenStreetMap. Your system should® automatically evict it.
